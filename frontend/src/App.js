@@ -5,7 +5,7 @@ function App() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    fetch('http://backend:5000/articles')
+    fetch('/articles')
       .then(response => response.json())
       .then(data => setArticles(data))
       .catch(error => console.error('Error fetching articles:', error));
