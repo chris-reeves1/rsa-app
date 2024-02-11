@@ -12,7 +12,7 @@ pipeline {
                 sh 'docker network create new || true' 
 
                 sh 'docker run -d --network new --name backend backend'
-                sh 'docker run -d -p 80:80 --network new --name frontend frontend'
+                sh 'docker run -d -p 3000:3000 --network new --name frontend frontend'
             }
         }
     }
