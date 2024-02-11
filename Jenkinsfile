@@ -5,7 +5,7 @@ pipeline {
             steps{
                 sh 'ls -lah frontend'
                 sh 'ls -lah backend'
-                sh 'docker rm $(docker ps -aq) || true'
+                sh 'docker rm -f $(docker ps -aq) || true'
                 sh 'docker build -t backend ./backend'
                 sh 'docker build -t frontend ./frontend'
 
