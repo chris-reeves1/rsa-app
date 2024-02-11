@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as a parent image
-FROM node:14
+FROM node:14 as build
 
 # Set the working directory in the container
 WORKDIR /app
@@ -13,10 +13,17 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Expose the port the app runs on
+# Build the app
+RUN npm run build
+
+# Install serve
+RUN npm install -g serve
+
+# Serve the app on port 3000 using serve
+CMD ["serve", "-s", "build", "-l", "3000"]
+
+# Expose port 3000
 EXPOSE 3000
 
-# Command to run the app
-CMD ["npm", "start"]
 
 
