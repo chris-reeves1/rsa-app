@@ -6,7 +6,7 @@ pipeline {
                 sh 'ls -lah frontend'
                 sh 'ls -lah backend'
                 sh 'docker rm $(docker ps -aq) || true'
-                sh 'docker build -t frontend ./frontend'
+                sh 'docker build -t frontend ./frontend/tech-article-feed'
                 sh 'docker build -t backend ./backend'
 
                 sh 'docker network create new' 
