@@ -1,29 +1,18 @@
-# Use an official Node.js runtime as a parent image
-FROM node:latest as build
-
-# Set the working directory in the container
+# Build stage
+FROM node:16-alpine as build
 WORKDIR /app
-
-# Copy package.json and package-lock.json to work directory
-COPY package.json package-lock.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application code
-COPY . .
-
-# Build the app
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci
+COPY frontend/ .
 RUN npm run build
 
-# Install serve
-RUN npm install -g serve
+# Serve stage
+FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
+COPY frontend/nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
 
-# Serve the app on port 3000 using serve
-CMD ["serve", "-s", "build", "-l", "3000"]
-
-# Expose port 3000
-EXPOSE 3000
 
 
 
