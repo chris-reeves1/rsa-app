@@ -10,7 +10,8 @@ app = Flask(__name__)
 CORS(app)
 
 # Configure database connection
-DATABASE_URI = 'mysql+pymysql://admin:password@database-1.ci6tejknpz61.eu-west-2.rds.amazonaws.com:3306/new2'
+DATABASE_URI = 'mysql+pymysql://admin:password@mysql:3306/mydatabase'
+'
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
