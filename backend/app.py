@@ -11,7 +11,7 @@ CORS(app)
 
 # Configure database connection
 DATABASE_URI = 'mysql+pymysql://admin:password@mysql:3306/mydatabase'
-'
+
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
