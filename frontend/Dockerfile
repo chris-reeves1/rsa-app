@@ -1,9 +1,8 @@
 # Build stage
 FROM node:16-alpine as build
 WORKDIR /app
-COPY frontend/package.json frontend/package-lock.json ./
-RUN npm ci
 COPY . .
+RUN npm ci
 RUN npm run build
 
 # Serve stage
