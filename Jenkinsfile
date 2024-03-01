@@ -12,6 +12,7 @@ pipeline {
                 script {
                     // Create a custom network for your app
                     sh "docker network create ${CUSTOM_NETWORK} || true"
+                    sh 'docker rm -f $(docker ps -aq) || true' 
                 }
             }
         }
@@ -54,16 +55,6 @@ pipeline {
                     }
                 }
             }
-        }
-    }
-
-    post {
-        always {
-            // Cleanup
-            sh 'docker stop mysql backend frontend'
-            sh 'docker rm mysql backend frontend'
-            // Remove the custom network
-            sh "docker network rm ${CUSTOM_NETWORK}"
         }
     }
 }
